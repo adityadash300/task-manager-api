@@ -48,6 +48,9 @@ const userSchema = new mongoose.Schema({
                 throw new Error('Password cannot contain the string "password!"')
             }
         }
+    },
+    avatar: {
+        type: Buffer
     }
 }, {
     timestamps: true
@@ -67,13 +70,14 @@ userSchema.methods.toJSON = function () {
     delete userObject.tokens
     delete userObject._id
     delete userObject.__v
+    delete userObject.avatar
 
     return userObject
 }
 
 userSchema.methods.generateAuthToken = async function() {
     const user  = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewtoken')
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
      user.tokens = user.tokens.concat({ token })
      await user.save()
