@@ -24,10 +24,7 @@ taskSchema.methods.toJSON = function() {
     const task = this
     const taskObject = task.toObject()
 
-    delete taskObject._id
     delete taskObject.owner
-    delete taskObject.__v
-
     return taskObject
 }
 
