@@ -9,7 +9,7 @@
     "test": "env-cmd -f ./config/test.env jest --watchAll --runInBand"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node"               
   },
   "keywords": [],
   "author": "",
